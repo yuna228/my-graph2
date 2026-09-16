@@ -286,3 +286,54 @@ with st.container(border=True):
     st.write(
         "상자 밖으로 표시되는 점에 마우스를 올리면 해당 영화명을 확인할 수 있습니다."
     )
+# ==================================================
+# 6. 첫 주 관객을 크기로 표현한 버블 그래프
+# ==================================================
+st.subheader("6. 개봉일 스크린 수와 총 관객 수의 관계 — 첫 주 관객 버블")
+
+fig6 = px.scatter(
+    df,
+    x="first_scrn",
+    y="total_audi",
+    size="first_week_audi",
+    color="genre",
+    hover_name="movieNm",
+    hover_data={
+        "first_scrn": ":,.0f",
+        "first_week_audi": ":,.0f",
+        "total_audi": ":,.0f",
+        "genre": True
+    },
+    size_max=50,
+    title="개봉일 스크린 수 × 총 관객 수 × 첫 주 관객",
+    labels={
+        "first_scrn": "개봉일 스크린 수",
+        "total_audi": "총 관객 수",
+        "first_week_audi": "첫 주 관객",
+        "genre": "장르"
+    }
+)
+
+fig6.update_traces(
+    marker=dict(
+        opacity=0.7,
+        line=dict(width=1)
+    )
+)
+
+fig6.update_layout(
+    height=550,
+    xaxis_title="개봉일 스크린 수",
+    yaxis_title="총 관객 수",
+    margin=dict(t=60, b=20, l=20, r=20)
+)
+
+st.plotly_chart(fig6, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것**")
+    st.write(
+        "개봉일 스크린 수와 총 관객 수의 관계를 살펴보면서, "
+        "버블 크기를 통해 첫 주 관객 규모까지 함께 비교할 수 있습니다. "
+        "점에 마우스를 올리면 영화명과 주요 관객 수를 확인할 수 있습니다."
+    )
