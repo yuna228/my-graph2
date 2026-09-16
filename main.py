@@ -198,3 +198,46 @@ with st.container(border=True):
         f"구간에 몰려 있으며, 가장 관객이 많은 영화는 **{max_movie}** "
         f"({max_audi:,.0f}명)이다."
     )
+# ==================================================
+# 4. 개봉일 스크린 수와 총 관객 수의 관계
+# ==================================================
+st.subheader("4. 개봉일 스크린 수와 총 관객 수의 관계")
+
+fig4 = px.scatter(
+    df,
+    x="first_scrn",
+    y="total_audi",
+    color="genre",
+    hover_name="movieNm",
+    hover_data={
+        "first_scrn": ":,.0f",
+        "total_audi": ":,.0f",
+        "genre": True
+    },
+    title="개봉일 스크린 수와 총 관객 수",
+    labels={
+        "first_scrn": "개봉일 스크린 수",
+        "total_audi": "총 관객 수",
+        "genre": "장르"
+    }
+)
+
+fig4.update_traces(
+    marker=dict(size=9, opacity=0.75)
+)
+
+fig4.update_layout(
+    height=550,
+    xaxis_title="개봉일 스크린 수",
+    yaxis_title="총 관객 수",
+    margin=dict(t=60, b=20, l=20, r=20)
+)
+
+st.plotly_chart(fig4, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것**")
+    st.write(
+        "개봉일에 얼마나 많은 스크린을 확보했는지와 영화의 총 관객 수 사이의 "
+        "관계를 살펴볼 수 있습니다. 점에 마우스를 올리면 영화명과 장르를 확인할 수 있습니다."
+    )
