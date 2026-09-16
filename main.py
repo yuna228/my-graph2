@@ -284,7 +284,5 @@ st.plotly_chart(fig5, use_container_width=True)
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
     st.write(
-        "영화가 10편 이상인 장르만 골라 장르별 총 관객 수의 중앙값, "
-        "분포와 이상치를 비교할 수 있습니다. "
         "상자 밖으로 표시되는 점에 마우스를 올리면 해당 영화명을 확인할 수 있습니다."
     )
