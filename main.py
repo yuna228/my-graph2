@@ -102,9 +102,8 @@ st.plotly_chart(fig1, use_container_width=True)
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
     st.write(
-        "장르별로 전체 영화에서 차지하는 편수와 비율을 비교할 수 있습니다."
+        "드라마와 애니메이션의 비율이 다른 종류보다 높다는 것을 알 수 있다."
     )
-
 
 # ==================================================
 # 2. 장르 → 영화 트리맵
@@ -148,7 +147,7 @@ st.plotly_chart(fig2, use_container_width=True)
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
     st.write(
-        "장르 안에서 영화별 총 관객 규모를 비교하고, 어떤 영화가 많은 관객을 모았는지 살펴볼 수 있습니다."
+        "어떤 장르에서 한 영화를 많이 본 관객들의 수를 알 수 있다."
     )
 # ==================================================
 # 3. 총 관객 수 히스토그램
@@ -197,5 +196,5 @@ with st.container(border=True):
     st.write(
         f"대부분의 영화는 **{most_common_bin.left:,.0f}명~{most_common_bin.right:,.0f}명** "
         f"구간에 몰려 있으며, 가장 관객이 많은 영화는 **{max_movie}** "
-        f"({max_audi:,.0f}명)입니다."
+        f"({max_audi:,.0f}명)이다."
     )
