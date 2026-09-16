@@ -238,6 +238,5 @@ st.plotly_chart(fig4, use_container_width=True)
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
     st.write(
-        "개봉일에 얼마나 많은 스크린을 확보했는지와 영화의 총 관객 수 사이의 "
-        "관계를 살펴볼 수 있습니다. 점에 마우스를 올리면 영화명과 장르를 확인할 수 있습니다."
+        "점에 마우스를 올리면 영화의 이름과 그 영화의 장르를 확인할 수 있다."
     )
