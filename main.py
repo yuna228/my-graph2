@@ -335,3 +335,47 @@ with st.container(border=True):
     st.write(
         "버블 크기를 통해 첫 주 관객 규모까지 함께 비교할 수 있다."
     )
+# ==================================================
+# 7. 제작 국가 → 장르 선버스트 그래프
+# ==================================================
+st.subheader("7. 제작 국가와 장르별 영화 구성")
+
+sunburst_df = (
+    df.groupby(["nation", "genre"])
+    .size()
+    .reset_index(name="movie_count")
+)
+
+fig7 = px.sunburst(
+    sunburst_df,
+    path=["nation", "genre"],
+    values="movie_count",
+    title="제작 국가 → 장르별 영화 편수",
+    labels={
+        "nation": "제작 국가",
+        "genre": "장르",
+        "movie_count": "영화 편수"
+    }
+)
+
+fig7.update_traces(
+    hovertemplate=(
+        "<b>%{label}</b><br>"
+        "영화 편수: %{value}편"
+        "<extra></extra>"
+    )
+)
+
+fig7.update_layout(
+    height=600,
+    margin=dict(t=60, b=20, l=20, r=20)
+)
+
+st.plotly_chart(fig7, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것**")
+    st.write(
+        "제작 국가별로 어떤 장르의 영화가 많이 만들어졌는지 "
+        "영화 편수를 기준으로 한눈에 비교할 수 있습니다. "
+    )
