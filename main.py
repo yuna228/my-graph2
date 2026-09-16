@@ -150,3 +150,52 @@ with st.container(border=True):
     st.write(
         "장르 안에서 영화별 총 관객 규모를 비교하고, 어떤 영화가 많은 관객을 모았는지 살펴볼 수 있습니다."
     )
+# ==================================================
+# 3. 총 관객 수 히스토그램
+# ==================================================
+st.subheader("3. 영화별 총 관객 수 분포")
+
+fig3 = px.histogram(
+    df,
+    x="total_audi",
+    nbins=20,
+    title="총 관객 수 분포",
+    labels={"total_audi": "총 관객 수", "count": "영화 편수"}
+)
+
+fig3.update_traces(
+    hovertemplate=(
+        "총 관객 구간: %{x}<br>"
+        "영화 편수: %{y}편"
+        "<extra></extra>"
+    )
+)
+
+fig3.update_layout(
+    height=500,
+    xaxis_title="총 관객 수",
+    yaxis_title="영화 편수",
+    margin=dict(t=60, b=20, l=20, r=20)
+)
+
+st.plotly_chart(fig3, use_container_width=True)
+
+# 가장 관객이 많은 영화
+max_movie = df.loc[df["total_audi"].idxmax(), "movieNm"]
+max_audi = df["total_audi"].max()
+
+# 가장 많이 몰린 구간
+counts, bins = pd.cut(
+    df["total_audi"],
+    bins=20,
+    retbins=True
+)
+most_common_bin = counts.value_counts().idxmax()
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것**")
+    st.write(
+        f"대부분의 영화는 **{most_common_bin.left:,.0f}명~{most_common_bin.right:,.0f}명** "
+        f"구간에 몰려 있으며, 가장 관객이 많은 영화는 **{max_movie}** "
+        f"({max_audi:,.0f}명)입니다."
+    )
