@@ -96,4 +96,4 @@ st.plotly_chart(fig, use_container_width=True)
 # 그래프 설명 영역
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
-    st.write("장르별로 전체 영화에서 차지하는 편수와 비율을 비교할 수 있습니다.")
+    st.write("생각보다 드라마의 수치와 애니메이션의 수치가 높았다.")
