@@ -379,3 +379,46 @@ with st.container(border=True):
         "제작 국가별로 어떤 장르의 영화가 많이 만들어졌는지 "
         "영화 편수를 기준으로 한눈에 비교할 수 있다. "
     )
+# ==================================================
+# 8. 10위권 체류 기간과 총 관객 수의 관계
+# ==================================================
+st.subheader("8. 첫 주 관객이 많았던 영화는 총 관객도 많은가?")
+
+fig8 = px.scatter(
+    df,
+    x="days_in_top10",
+    y="total_audi",
+    hover_name="movieNm",
+    hover_data={
+        "days_in_top10": ":,.0f",
+        "total_audi": ":,.0f"
+    },
+    title="첫 주 관객이 많았던 영화는 총 관객도 많은가?",
+    labels={
+        "days_in_top10": "10위권에 머문 날수",
+        "total_audi": "총 관객 수"
+    }
+)
+
+fig8.update_traces(
+    marker=dict(
+        size=9,
+        opacity=0.75
+    )
+)
+
+fig8.update_layout(
+    height=550,
+    xaxis_title="10위권에 머문 날수",
+    yaxis_title="총 관객 수",
+    margin=dict(t=60, b=20, l=20, r=20)
+)
+
+st.plotly_chart(fig8, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것**")
+    st.write(
+        "영화가 10위권에 머문 날수와 총 관객 수의 관계를 살펴볼 수 있다. "
+        "점에 마우스를 올리면 영화명과 10위권 체류 기간, 총 관객 수를 확인할 수 있다."
+    )
