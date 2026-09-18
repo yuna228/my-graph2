@@ -380,7 +380,7 @@ with st.container(border=True):
         "영화 편수를 기준으로 한눈에 비교할 수 있다. "
     )
 # ==================================================
-# 8. 10위권 체류 기간과 총 관객 수의 관계
+# 8. 첫 주 관객이 많았던 영화는 총 관객도 많은가?
 # ==================================================
 st.subheader("8. 첫 주 관객이 많았던 영화는 총 관객도 많은가?")
 
@@ -388,22 +388,26 @@ fig8 = px.scatter(
     df,
     x="days_in_top10",
     y="total_audi",
+    size="first_week_audi",
     hover_name="movieNm",
     hover_data={
         "days_in_top10": ":,.0f",
+        "first_week_audi": ":,.0f",
         "total_audi": ":,.0f"
     },
+    size_max=50,
     title="첫 주 관객이 많았던 영화는 총 관객도 많은가?",
     labels={
         "days_in_top10": "10위권에 머문 날수",
-        "total_audi": "총 관객 수"
+        "total_audi": "총 관객 수",
+        "first_week_audi": "첫 주 관객"
     }
 )
 
 fig8.update_traces(
     marker=dict(
-        size=9,
-        opacity=0.75
+        opacity=0.7,
+        line=dict(width=1)
     )
 )
 
@@ -419,6 +423,6 @@ st.plotly_chart(fig8, use_container_width=True)
 with st.container(border=True):
     st.markdown("**이 그래프로 알 수 있는 것**")
     st.write(
-        "영화가 10위권에 머문 날수와 총 관객 수의 관계를 살펴볼 수 있다. "
-        "점에 마우스를 올리면 영화명과 10위권 체류 기간, 총 관객 수를 확인할 수 있다."
+        "10위권에 머문 날수와 총 관객 수의 관계를 살펴보면서, "
+        "버블 크기를 통해 첫 주 관객 규모까지 함께 비교할 수 있다."
     )
